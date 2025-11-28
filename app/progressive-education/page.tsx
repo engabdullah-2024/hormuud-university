@@ -1,3 +1,4 @@
+// app/progressive-education/page.tsx
 "use client";
 
 import Image from "next/image";
@@ -43,7 +44,17 @@ const items = [
   },
 ];
 
-export function ProgressiveEducationSection() {
+// ✅ DEFAULT EXPORT – required by Next.js
+export default function ProgressiveEducationPage() {
+  return (
+    <main className="min-h-screen bg-muted/20">
+      <ProgressiveEducationSection />
+    </main>
+  );
+}
+
+// Your existing section kept as-is (just used inside the page)
+function ProgressiveEducationSection() {
   return (
     <section className="w-full bg-background py-12 md:py-16">
       <div className="mx-auto flex max-w-6xl flex-col gap-8 px-4 lg:px-6">

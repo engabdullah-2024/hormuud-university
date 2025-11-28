@@ -1,6 +1,6 @@
 import React from 'react'
-import { Hero } from './hero/page'
-import { ProgressiveEducationSection } from './progressive-education/page'
+import Hero  from './hero/page'
+import  ProgressiveEducationSection  from './progressive-education/page'
 import EventsPage from './events/page'
 import NewsPage from './news/page'
 import GraduatorsPage from './graduators/page'
