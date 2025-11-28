@@ -4,6 +4,7 @@ import "./globals.css";
 
 import { SiteHeader } from "./_components/site-header";
 import { SiteFooter } from "./_components/site_footer";
+import { WhatsAppFloat } from "./_components/whatsapp-float"; // ✅ add this
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -39,6 +40,9 @@ export default function RootLayout({
 
         {/* FOOTER */}
         <SiteFooter />
+
+        {/* ✅ FLOATING WHATSAPP BUTTON */}
+        <WhatsAppFloat />
       </body>
     </html>
   );
