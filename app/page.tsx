@@ -7,7 +7,7 @@ import GraduatorsPage from './graduators/page'
 import FactsFiguresPage from './facts_figures/page'
 import CampusMapsPage from './_components/campus/page'
 
-export default function Home() {
+export default function HomePage() {
   return (
     <div>
       <Hero/>
