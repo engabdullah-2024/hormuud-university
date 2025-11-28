@@ -1,3 +1,6 @@
+// app/hero/page.tsx
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import { BookOpen, ArrowRight } from "lucide-react";
@@ -6,12 +9,17 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 
-export function Hero() {
+// Default export required by Next.js for a page
+export default function HeroPage() {
+  return <HeroSection />;
+}
+
+// You can keep this as a separate component if you want to reuse later
+function HeroSection() {
   return (
     <section className="relative w-full overflow-hidden border-b bg-background">
       {/* Background image */}
       <div className="absolute inset-0">
-        {/* Put your hero image in /public/images/library-hero.jpg */}
         <Image
           src="/lib.jpg"
           alt="Hormuud University Library"
