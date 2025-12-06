@@ -1,7 +1,17 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { GraduationCap, Medal, BookOpen, Users, ArrowUpRight } from "lucide-react";
+import {
+  GraduationCap,
+  Medal,
+  BookOpen,
+  Users,
+  ArrowUpRight,
+  Wifi,
+  HandHeart,
+  FlaskConical,
+} from "lucide-react";
+import { motion } from "framer-motion";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -121,55 +131,71 @@ function StatCard({ stat }: { stat: Stat }) {
   const formatted = new Intl.NumberFormat("en-US").format(current);
 
   return (
-    <Card
+    <motion.div
       ref={ref}
-      className="relative overflow-hidden border-slate-200 bg-background/90 shadow-sm transition-transform hover:-translate-y-1 hover:shadow-lg"
+      className="h-full"
+      initial={{ opacity: 0, y: 24 }}
+      animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
+      transition={{
+        duration: 0.6,
+        ease: [0.21, 0.47, 0.32, 0.98],
+      }}
+      whileHover={{ y: -6, scale: 1.02 }}
+      whileTap={{ scale: 0.99 }}
     >
-      {/* soft gradient background */}
-      <div
-        className={`pointer-events-none absolute inset-x-0 top-0 h-24 bg-gradient-to-b ${stat.color}`}
-      />
-
-      <CardHeader className="relative flex flex-row items-start justify-between gap-3 pb-3">
-        <div className="space-y-1">
-          <CardTitle className="text-sm font-semibold text-slate-900">
-            {stat.label}
-          </CardTitle>
-        </div>
-
+      <Card
+        tabIndex={0}
+        className="group relative h-full overflow-hidden border-slate-200 bg-background/90 shadow-sm transition-shadow hover:shadow-lg"
+      >
+        {/* soft gradient background */}
         <div
-          className={`flex h-9 w-9 items-center justify-center rounded-xl bg-slate-100 text-slate-700 ${stat.accent}`}
-        >
-          <Icon className="h-5 w-5" />
-        </div>
-      </CardHeader>
+          className={`pointer-events-none absolute inset-x-0 top-0 h-24 bg-gradient-to-b ${stat.color}`}
+        />
 
-      <CardContent className="relative space-y-2 pt-0">
-        <div className="flex items-baseline gap-2">
-          <span className={`text-2xl font-semibold ${stat.accent}`}>
-            {formatted}
+        <CardHeader className="relative flex flex-row items-start justify-between gap-3 pb-3">
+          <div className="space-y-1">
+            <CardTitle className="text-sm font-semibold text-slate-900">
+              {stat.label}
+            </CardTitle>
+          </div>
+
+          <div
+            className={`flex h-9 w-9 items-center justify-center rounded-xl bg-slate-100 text-slate-700 ${stat.accent}`}
+          >
+            <Icon className="h-5 w-5" />
+          </div>
+        </CardHeader>
+
+        <CardContent className="relative space-y-2 pt-0">
+          <div className="flex items-baseline gap-2">
+            <span className={`text-2xl font-semibold ${stat.accent}`}>
+              {formatted}
+              {stat.suffix}
+            </span>
+
+            {/* this row is hidden until hover / focus */}
+            <span className="flex items-center gap-1 text-[11px] uppercase tracking-[0.16em] text-slate-500 opacity-0 transition-all duration-200 group-hover:opacity-100 group-focus-visible:opacity-100 group-hover:translate-x-1 group-focus-visible:translate-x-1">
+              total
+              <ArrowUpRight className="h-3 w-3" />
+            </span>
+          </div>
+
+          <p className="text-xs text-muted-foreground md:text-sm">
+            {stat.description}
+          </p>
+        </CardContent>
+
+        {/* Value badge in corner – only visible on hover/focus */}
+        <div className="pointer-events-none absolute right-3 top-3 translate-y-1 opacity-0 transition-all duration-200 group-hover:translate-y-0 group-hover:opacity-100 group-focus-visible:translate-y-0 group-focus-visible:opacity-100">
+          <span
+            className={`inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[10px] font-semibold text-white shadow-sm ${stat.badgeBg}`}
+          >
+            {stat.value.toLocaleString()}
             {stat.suffix}
           </span>
-          <span className="flex items-center gap-1 text-[11px] uppercase tracking-[0.16em] text-slate-500">
-            total
-            <ArrowUpRight className="h-3 w-3" />
-          </span>
         </div>
-        <p className="text-xs text-muted-foreground md:text-sm">
-          {stat.description}
-        </p>
-      </CardContent>
-
-      {/* Value badge in corner */}
-      <div className="pointer-events-none absolute right-3 top-3">
-        <span
-          className={`inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[10px] font-semibold text-white shadow-sm ${stat.badgeBg}`}
-        >
-          {stat.value.toLocaleString()}
-          {stat.suffix}
-        </span>
-      </div>
-    </Card>
+      </Card>
+    </motion.div>
   );
 }
 
@@ -204,6 +230,22 @@ export default function FactsFiguresPage() {
         <p className="pt-2 text-center text-xs text-muted-foreground md:text-sm">
           Figures are indicative and may be updated at the beginning of each academic year.
         </p>
+
+        {/* Icons mini-row */}
+        <div className="mt-6 flex flex-wrap items-center justify-center gap-6 text-xs text-muted-foreground md:text-sm">
+          <div className="inline-flex items-center gap-2">
+            <Wifi className="h-4 w-4 text-emerald-600" />
+            <span>High-speed Wi-Fi across campus</span>
+          </div>
+          <div className="inline-flex items-center gap-2">
+            <HandHeart className="h-4 w-4 text-emerald-600" />
+            <span>Student-centred wellbeing & support</span>
+          </div>
+          <div className="inline-flex items-center gap-2">
+            <FlaskConical className="h-4 w-4 text-emerald-600" />
+            <span>Research-ready labs and equipment</span>
+          </div>
+        </div>
       </section>
     </main>
   );
